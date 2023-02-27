@@ -11,7 +11,7 @@ app.use(express.json())
 
 // Mongodb
 
-const uri = "mongodb+srv://cycleGuru:BOGLIBqy71Zpj8J2@cluster0.hhjg5g4.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.hhjg5g4.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
@@ -20,8 +20,6 @@ async function run() {
 
     const productCollection = client.db('product-list').collection('products')
     console.log("Connected to DataBase");
-
-    // await client.connect()
 
     // (Read) Find Multiple Documents
     app.get('/purchase', async (req, res) => {
